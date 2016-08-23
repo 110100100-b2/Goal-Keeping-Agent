@@ -21,9 +21,6 @@ goalie.shape('circle')
 #Drawing Visualisation
 graphicsTurtle = turtle.Turtle()
 functions.graphics(wn, graphicsTurtle, line, 50)
-wn.getshapes()
-
-
 
 wn.listen()
 wn.mainloop()
