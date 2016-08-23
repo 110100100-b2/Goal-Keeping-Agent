@@ -11,19 +11,26 @@ def random_starting_position(x, turtle, line_start, line_finish):
     turtle.setpos(x, random.randrange(line_start, line_finish))
     
 
-def draw_line(vector, turtle, height, width):
+def draw_line(window, turtle, width):
     #@Parameters: 
         # vector (x,y) - denotes starting position of line
         # turtle - denotes turtle object
         # height - denotes height of line
-    turtle.setpos(vector)
+    screensize = window.screensize()
+    x = -(screensize[0]//1.25)
+    y = -(screensize[1]//2) 
+    turtle.penup()
+    turtle.setpos(x,y)
     turtle.left(90)
     turtle.pendown()
     turtle.width(width)
-    turtle.forward(height)
-    turtle.penup()
+    turtle.forward(screensize[1])
+    turtle.penup()    
+    #NOTE : This function draws the line dynamically based on the screensize, 
+    #the '1.25' and '2' are just scaling constants to position the turtle to draw the line 
+    #based on the screensize
     
-    
+
     
 
     

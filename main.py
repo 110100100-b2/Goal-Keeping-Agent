@@ -10,7 +10,8 @@ wn.bgcolor("lightgreen")
 # Creating Goalie Turtle Object
 goalie = turtle.Turtle()
 
-functions.draw_line((0,0), goalie, 100, 5)
+functions.draw_line(wn, goalie, 5)
+
 
 
 wn.listen()
