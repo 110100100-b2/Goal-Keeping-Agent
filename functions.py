@@ -2,12 +2,10 @@
 
 import random
 
-def random_starting_position(x, line_start, line_finish):
+def setRandomPos(line):
     #@Parameters: 
-        # x - denotes position of line along x-axis
-        #line_start - y co-ordinate at start of line
-        #line_finish - y co-ordinate at end of line
-    return (x, random.randrange(line_start, line_finish))
+        # line - line object defined in main.py, essentially a 3-tuple (x, y, height)
+    return (line[0], random.randrange(line[1], line[1]+line[2]))
     
 
 def draw_line(window, turtle, width):
