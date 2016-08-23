@@ -10,7 +10,9 @@ wn.bgcolor("lightgreen")
 # Creating Goalie Turtle Object
 goalie = turtle.Turtle()
 
-functions.draw_line(wn, goalie, 5)
+# We use this to determine the range which the Goalie can randomly appear
+line = functions.draw_line(wn, goalie, 5)
+
 
 
 

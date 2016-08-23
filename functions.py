@@ -16,19 +16,27 @@ def draw_line(window, turtle, width):
         # window - denotes Turtle.Screen() object
         # turtle - denotes turtle object
         # width - denotes width of line
+    
+    # Data needed to draw line
     screensize = window.screensize()
     x = -(screensize[0]//1.25)
     y = -(screensize[1]//2) 
+    line_height = screensize[1]
+    #NOTE : This function draws the line dynamically based on the screensize, 
+        #the '1.25' and '2' are just scaling constants to position the turtle to draw the line 
+        #based on the screensize    
+    
+    # Drawing Line
     turtle.penup()
     turtle.setpos(x,y)
     turtle.left(90)
     turtle.pendown()
     turtle.width(width)
-    turtle.forward(screensize[1])
+    turtle.forward(line_height)
     turtle.penup()    
-    #NOTE : This function draws the line dynamically based on the screensize, 
-    #the '1.25' and '2' are just scaling constants to position the turtle to draw the line 
-    #based on the screensize
+    
+    # Returning the co-ordinates of the starting point of the line <x,y> and the line height
+    return (x, y, line_height)
     
 
     
