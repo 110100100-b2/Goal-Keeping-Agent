@@ -1,6 +1,8 @@
 # File containing different functions for certain aspects of the assignment. Just code whatever part of the assignment you want to and we can throw the code pieces together later on in main.py
 
 import random
+import math
+
 
 def setRandomPos(line):
     #@Parameters: 
@@ -24,6 +26,7 @@ def draw_line(window, turtle, width):
         #based on the screensize    
     
     # Drawing Line
+    turtle.shape('blank')
     turtle.penup()
     turtle.setpos(x,y)
     turtle.left(90)
@@ -37,6 +40,50 @@ def draw_line(window, turtle, width):
     return (x, y, line_height)
     
 
-    
 
+def graphics(window, turtle, line, dashes):
+    #@Parameters: 
+        # window - denotes Turtle.Screen() object
+        # turtle - denotes turtle object
+        # line - denotes line drawn
+        # dashes - number of dashes (change this in main.py if you want to)
+    
+    # Drawing initial x
+    y = line[2]//2
+    screensize = window.screensize()
+    x_spot = (screensize[0]//1.25)
+    turtle.shape('blank')
+    turtle.penup()
+    turtle.setpos(x_spot, line[1] + y)
+    turtle.width(20)
+    turtle.shape('turtle')
+    turtle.stamp()
+    
+    
+    turtle.shape('blank') # Resetting 'shape' property to default
+    # Drawing Upper Dotted Line
+    x_distance = x_spot - line[0]    
+    theta = math.atan(y/x_distance)
+    turtle.left(math.degrees(math.pi-theta))
+    
+    r = math.sqrt(x_distance**2 + y**2)
+    turtle.width(1)
+    #Drawing Dashes ------
+    for i in range(dashes):
+        turtle.pendown()
+        turtle.forward((r/dashes)/2)     
+        turtle.penup()  
+        turtle.forward((r/dashes)/2)
+    
+    
+    # Drawing Lower Dotted Line
+    turtle.setpos(x_spot, line[1] + y)
+    turtle.towards(x_spot, line[1] + y)
+    turtle.left(math.degrees(2*theta))
+    #Drawing Dashes ------
+    for i in range(dashes):
+            turtle.pendown()
+            turtle.forward((r/dashes)/2)     
+            turtle.penup()  
+            turtle.forward((r/dashes)/2)    
     
