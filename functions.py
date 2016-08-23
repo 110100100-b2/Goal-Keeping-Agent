@@ -13,9 +13,9 @@ def random_starting_position(x, turtle, line_start, line_finish):
 
 def draw_line(window, turtle, width):
     #@Parameters: 
-        # vector (x,y) - denotes starting position of line
+        # window - denotes Turtle.Screen() object
         # turtle - denotes turtle object
-        # height - denotes height of line
+        # width - denotes width of line
     screensize = window.screensize()
     x = -(screensize[0]//1.25)
     y = -(screensize[1]//2) 
