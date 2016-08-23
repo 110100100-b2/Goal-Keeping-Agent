@@ -17,8 +17,13 @@ def draw_line(vector, turtle, height, width):
         # turtle - denotes turtle object
         # height - denotes height of line
     turtle.setpos(vector)
+    turtle.left(90)
     turtle.pendown()
     turtle.width(width)
     turtle.forward(height)
     turtle.penup()
+    
+    
+    
+
     
