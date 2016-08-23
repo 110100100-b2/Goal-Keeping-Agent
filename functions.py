@@ -2,13 +2,12 @@
 
 import random
 
-def random_starting_position(x, turtle, line_start, line_finish):
+def random_starting_position(x, line_start, line_finish):
     #@Parameters: 
         # x - denotes position of line along x-axis
-        #turtle - denotes turtle object
         #line_start - y co-ordinate at start of line
         #line_finish - y co-ordinate at end of line
-    turtle.setpos(x, random.randrange(line_start, line_finish))
+    return (x, random.randrange(line_start, line_finish))
     
 
 def draw_line(window, turtle, width):
@@ -35,7 +34,8 @@ def draw_line(window, turtle, width):
     turtle.forward(line_height)
     turtle.penup()    
     
-    # Returning the co-ordinates of the starting point of the line <x,y> and the line height
+    # Returning the co-ordinates of the starting point of the line <x,y> and the line height.
+    # We need this info returned here to determine the range in which the 'Goalie' turtle can spawn.
     return (x, y, line_height)
     
 
