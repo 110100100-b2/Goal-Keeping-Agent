@@ -1,4 +1,4 @@
-# File containing different functions for certain aspects of the assignment. We 
+# File containing different functions for certain aspects of the assignment. Just code whatever part of the assignment you want to and we can throw the code pieces together later on in main.py
 
 import random
 
