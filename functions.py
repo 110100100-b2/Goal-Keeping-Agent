@@ -3,6 +3,14 @@
 import random
 import math
 
+start_point = (0, 0)
+x_spot = 0
+theta = 0
+r = 0
+x_distance = 0
+
+
+
 
 def setRandomPos(line):
     #@Parameters: 
@@ -39,9 +47,42 @@ def draw_line(window, turtle, width):
     # We need this info returned here to determine the range in which the 'Goalie' turtle can spawn.
     return (x, y, line_height)
     
-
+def projection(line):
+    global theta
+    global r
+    
+    # Generating random angle in range (-a, a):
+    angle = random.uniform(theta*-1, theta)
+        
+    # Projecting onto line
+    y = r*math.sin(angle)
+    x = line[0]
+    return [(x, y), angle]
+   # Returns projected (exact) impact position on line and angle
+    
+def shoot(window, turtle, line, speed):
+    global start_point
+    turtle.shape('blank')
+    turtle.clearstamps()
+    turtle.penup()
+    turtle.setpos(start_point)
+    window.register_shape('./icons/soccer_ball.gif')
+    turtle.shape('./icons/soccer_ball.gif')    
+    projection_info = projection(line)
+    impact_position = projection_info[0]
+    turtle.goto(impact_position)
+    turtle.speed(speed)  
+    turtle.write('Impact at {}, speed : {}'.format(impact_position, speed))
+    
+    
+    
 
 def graphics(window, turtle, line, dashes):
+    global theta
+    global x_spot
+    global start_point
+    global x_distance
+    global r
     #@Parameters: 
         # window - denotes Turtle.Screen() object
         # turtle - denotes turtle object
@@ -58,6 +99,9 @@ def graphics(window, turtle, line, dashes):
     turtle.width(20)
     turtle.shape('turtle')
     turtle.stamp()
+    
+    # Setting start point
+    start_point = (x_spot, line[1] + y)
     
     
     turtle.shape('blank') # Resetting 'shape' property to default

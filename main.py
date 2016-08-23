@@ -10,6 +10,11 @@ wn.bgcolor("lightgreen")
 # Creating Goalie Turtle Object
 goalie = turtle.Turtle()
 
+#Creating Ball
+ball = turtle.Turtle()
+ball.shape('blank')    
+    
+
 
 # We use this to determine the range which the Goalie can randomly appear
 line = functions.draw_line(wn, goalie, 5)
@@ -21,6 +26,12 @@ goalie.shape('circle')
 #Drawing Visualisation
 graphicsTurtle = turtle.Turtle()
 functions.graphics(wn, graphicsTurtle, line, 50)
+
+
+def shoot():
+    functions.shoot(wn, ball, line, 2)
+
+wn.onkey(shoot, "space")
 
 wn.listen()
 wn.mainloop()
