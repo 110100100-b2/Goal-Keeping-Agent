@@ -6,4 +6,8 @@
 - [x] Position Turtle Randomly across line
 - [x] Draw Dashed Lines for Visualisation
 - [x] Shooting and Keeping AI
-- [ ] Multithreading
+- [ ] Standardize Distance
+- [ ] Fix Overshooting Bug
+- [ ] Add Comments
+
+- [ ] Documentation
