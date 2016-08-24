@@ -155,8 +155,18 @@ def engine(window, ball, keeper, line, ball_speed, keeper_speed):
     p2.start()
     
 def generate_random_speed():
-    # @Lisa here's a function for you to put the code to generate the random speed, once I figure a way to execute both the shoot() and react() functions simultaneously then I'll use this generate_random_speed() function in the engine() function (or whatever function I end up using to fix the bug)
-    return null
+    values=[0.5,0.25,1.25,1.75,2]
+    # variable s= the speed of the Goalie
+    s=random.randrange(1,10)  
+    # so the range is 1-10, because speed works in that range of integers. I didn't include 0 because well...that means no movement. Turns out 1=fastest and 0=slowest.
+    speed=(int)(s*(values[random.randrange(0,4)])) # speed of the ball
+    if speed > 10 or speed <0.5:
+        speed=6  # 6 is seen as the 'normal' speed
+    
+    
+    #return null
+    return speed    
+
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
