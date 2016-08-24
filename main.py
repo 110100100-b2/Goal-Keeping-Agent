@@ -29,7 +29,9 @@ functions.graphics(wn, graphicsTurtle, line, 50)
 
 
 def shoot():
-    functions.shoot(wn, ball, line, 2)
+    #functions.shoot(wn, ball, line, 2)
+    #functions.react(wn, goalie, line, 1)
+    functions.engine(wn, ball, goalie, line, 2, 1)
 
 wn.onkey(shoot, "space")
 

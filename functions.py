@@ -2,14 +2,13 @@
 
 import random
 import math
+from threading import Thread
 
 start_point = (0, 0)
 x_spot = 0
 theta = 0
 r = 0
 x_distance = 0
-
-
 
 
 def setRandomPos(line):
@@ -59,8 +58,9 @@ def projection(line):
     x = line[0]
     return [(x, y), angle]
    # Returns projected (exact) impact position on line and angle
+   # Returns angle if needed (later on)
     
-def shoot(window, turtle, line, speed):
+def shoot(window, turtle, line, speed, impact_position):
     global start_point
     turtle.shape('blank')
     turtle.clearstamps()
@@ -68,13 +68,22 @@ def shoot(window, turtle, line, speed):
     turtle.setpos(start_point)
     window.register_shape('./icons/soccer_ball.gif')
     turtle.shape('./icons/soccer_ball.gif')    
-    projection_info = projection(line)
-    impact_position = projection_info[0]
     turtle.goto(impact_position)
     turtle.speed(speed)  
     turtle.write('Impact at {}, speed : {}'.format(impact_position, speed))
     
     
+def react(window, keeper, line, speed, impact):
+    keeper.goto(impact)
+    keeper.speed(speed)  
+    
+def engine(window, ball, keeper, line, ball_speed, keeper_speed):
+    projection_data = projection(line)
+    impact_position = projection_data[0]
+    p1 = Thread(target = shoot, args=(window, ball, line, ball_speed, impact_position))
+    p1.start()
+    p2 = Thread(target = react, args=(window, keeper, line, keeper_speed, impact_position))     
+    p2.start()
     
 
 def graphics(window, turtle, line, dashes):
