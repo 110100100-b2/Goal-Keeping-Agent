@@ -32,7 +32,7 @@ functions.graphics(wn, graphicsTurtle, line, 50)
 def shoot():
     #functions.shoot(wn, ball, line, 2)
     #functions.react(wn, goalie, line, 1)
-    functions.engine(wn, ball, goalie, line, 2, 1)
+    functions.simulation(wn, ball, goalie, line, 4, 1, 50)
 
 wn.onkey(shoot, "space")
 

@@ -6,6 +6,7 @@
 -----------------
 """
 
+import turtle # For testing
 
 import random
 import math
@@ -36,6 +37,8 @@ x_spot = 0
 theta = 0
 r = 0
 x_distance = 0
+saves = 0
+goals = 0
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -92,6 +95,7 @@ def projection(line):
     #@Outline: This function calculates the projected impact position of the ball from a random angle. Just uses some basic trigonometry to calculate projected impact position from randomly generated angle
     global theta
     global r
+    global x_distance
     """
     #@Params: 
      - theta (angle between starting point to either top of goal post or bottom of goal post)
@@ -104,7 +108,10 @@ def projection(line):
     y = r*math.sin(angle)
     x = line[0]
     
-    return [(x, y), angle]
+    # Hypotenuse of Impact Triangle
+    hyp = math.sqrt(y**2 + x_distance**2)
+    
+    return [(x, y), angle, hyp]
    
    # Returns projected (exact) impact position on line and angle
    # Returns angle if needed (later on)
@@ -128,6 +135,97 @@ This is where the main portion of the AI is housed, it contains three functions
 
 """
 
+def orient_turtle(turtle, impact_pos):
+    turtle.setheading(0)
+    turtle.left(turtle.towards(impact_pos))
+    
+def goal_or_save(goals,  saves, ball, ball_distance, keeper_distance, ball_speed, keeper_speed):
+    # time = distance/speed
+    time_ball = ball_distance/ball_speed
+    time_keeper = keeper_distance/keeper_speed
+    if (time_ball > time_keeper):
+        saves += 1
+        ball.write('Save')
+    else:
+        goals +=1
+        ball.write('Goal')
+ 
+def standardize_speed_distance():
+    break
+    
+def simulation(window, ball, keeper, line, ball_speed, keeper_speed, iters):
+    # Due to the nature of the iterations there will be a small error in the region of +-1 pixel
+    global start_point
+    global saves
+    global goals
+    # Getting Projection Data
+    projection_data = projection(line)
+    impact_position = projection_data[0]
+    angle = projection_data[1]
+    
+    #Setting Speed of Turtles
+    ball.speed(ball_speed)
+    keeper.speed(keeper_speed)
+    
+   
+    # Orienting turtles
+    ball.penup()
+    ball.width(1)
+    ball.setpos(start_point)
+    
+    #Setting ball 
+    window.register_shape('./icons/soccer_ball.gif')
+    ball.shape('./icons/soccer_ball.gif')    
+
+    orient_turtle(ball, impact_position)
+    orient_turtle(keeper, impact_position)
+
+
+    
+    #Moving Turtles
+    hyp = projection_data[2] # Distance ball has to travel
+    keeper_distance = math.fabs(impact_position[1] - keeper.pos()[1])
+    
+    ball_distance_counter = hyp
+    keeper_distance_counter = keeper_distance
+    
+    for i in range(iters):
+        #Moving Ball
+        ball.pencolor('grey')
+        ball.pendown()
+        if ((ball_distance_counter - hyp/iters/2) > 0.0):
+            ball.forward(hyp/iters/2)
+            ball_distance_counter -= hyp/iters/2
+        ball.penup()
+        if ((ball_distance_counter - hyp/iters/2) > 0.0):
+            ball.forward(hyp/iters/2)
+            ball_distance_counter -= hyp/iters/2       
+        
+        #Moving Keeper
+        if ((keeper_distance_counter - keeper_distance/iters) > 0.0):
+            keeper.forward(keeper_distance/iters)
+            keeper_distance_counter -= keeper_distance/iters   
+            
+        """#Breaking loop
+        if ((ball.pos()[0] - line[0]) <=1): # Crossing Vertical Line
+            break
+        elif ((ball.pos()[1] - line[1]) <=1): #Crossing Lower Post
+            break
+        elif ((keeper.pos()[1] - line[1]) >=-1): # Crossing Lower Post
+            break 
+        elif ((keeper.pos()[1] - line[1]) <=1): # Crossing Upper Post
+            break             
+        elif ((keeper.pos()[1] - line[1]) <=1): # Crossing Upper Post
+            break
+        """
+    goal_or_save(goals, saves, ball, hyp, keeper_distance, ball_speed, keeper_speed)
+    
+    
+        
+
+    
+
+"""
 def shoot(window, turtle, line, speed, impact_position):
     global start_point
     turtle.shape('blank')
@@ -154,6 +252,8 @@ def engine(window, ball, keeper, line, ball_speed, keeper_speed):
     p2 = Thread(target = react, args=(window, keeper, line, keeper_speed, impact_position))     
     p2.start()
     
+    """
+    
 def generate_random_speed():
     values=[0.5,0.25,1.25,1.75,2]
     # variable s= the speed of the Goalie
@@ -169,13 +269,17 @@ def generate_random_speed():
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+"""
+------------
+  GRAPHICS
+------------
+
+The 'graphics()' function draws the Playing Field and Visualisation aspects of the program
+
+
+"""
 
 def graphics(window, turtle, line, dashes):    
-    """
-    @Outline:     
-    This function draws the Playing Field and Visualisation aspects of the program
-
-    """
     global theta
     global x_spot
     global start_point
