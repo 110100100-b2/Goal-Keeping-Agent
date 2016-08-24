@@ -6,7 +6,7 @@ import functions
 wn = turtle.Screen()
 wn.title("Goal Keeping Agent")
 wn.bgcolor("lightgreen")
-wn.bgpic(r"back.gif")
+wn.bgpic('back.gif')
 
 # Creating Goalie Turtle Object
 goalie = turtle.Turtle()
