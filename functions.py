@@ -220,39 +220,7 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed, iters):
         """
     goal_or_save(goals, saves, ball, hyp, keeper_distance, ball_speed, keeper_speed)
     
-    
-        
 
-    
-
-"""
-def shoot(window, turtle, line, speed, impact_position):
-    global start_point
-    turtle.shape('blank')
-    turtle.clearstamps()
-    turtle.penup()
-    turtle.setpos(start_point)
-    window.register_shape('./icons/soccer_ball.gif')
-    turtle.shape('./icons/soccer_ball.gif')    
-    turtle.goto(impact_position)
-    turtle.speed(speed)  #@Lisa, here's the speed, 
-    turtle.write('Impact at {}, speed : {}'.format(impact_position, speed)) #@Lisa, don't worry about this, this write() thing is just temporary, I'll make it look nicer later on
-    
-    
-def react(window, keeper, line, speed, impact):
-    keeper.goto(impact)
-    keeper.speed(speed)  
-    
-def engine(window, ball, keeper, line, ball_speed, keeper_speed):
-    # This whole thing will be revamped and reworked later on
-    projection_data = projection(line)
-    impact_position = projection_data[0]
-    p1 = Thread(target = shoot, args=(window, ball, line, ball_speed, impact_position))
-    p1.start()
-    p2 = Thread(target = react, args=(window, keeper, line, keeper_speed, impact_position))     
-    p2.start()
-    
-    """
     
 def generate_random_speed():
     values=[0.5,0.25,1.25,1.75,2]
