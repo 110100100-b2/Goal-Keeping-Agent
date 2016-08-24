@@ -155,7 +155,7 @@ def engine(window, ball, keeper, line, ball_speed, keeper_speed):
     p2.start()
     
 def generate_random_speed():
-    # @Lisa here's a function for to put the code to generate the random speed, once I figure a way to execute both the shoot() and react() functions simultaneously then I'll use this generate_random_speed() function in the engine() function (or whatever function I end up using to fix the bug)
+    # @Lisa here's a function for you to put the code to generate the random speed, once I figure a way to execute both the shoot() and react() functions simultaneously then I'll use this generate_random_speed() function in the engine() function (or whatever function I end up using to fix the bug)
     return null
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
