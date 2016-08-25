@@ -170,12 +170,12 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed, iters):
    
     # Orienting turtles
     ball.penup()
-    ball.width(1)
+    ball.width(3)
     ball.setpos(start_point)
     
     #Setting ball 
-    window.register_shape('./icons/soccer_ball.gif')
-    ball.shape('./icons/soccer_ball.gif')    
+    window.register_shape('./images/soccer_ball.gif')
+    ball.shape('./images/soccer_ball.gif')    
 
     orient_turtle(ball, impact_position)
     orient_turtle(keeper, impact_position)
@@ -270,7 +270,8 @@ def graphics(window, turtle, line, dashes):
     turtle.penup()
     turtle.setpos(x_spot, line[1] + y)
     turtle.width(20)
-    turtle.shape('turtle')
+    window.register_shape('./images/x_spot.gif')
+    turtle.shape('./images/x_spot.gif')
     turtle.stamp()
     
     # Setting start point
@@ -284,7 +285,8 @@ def graphics(window, turtle, line, dashes):
     turtle.left(math.degrees(math.pi-theta))
     
     r = math.sqrt(x_distance**2 + y**2)
-    turtle.width(1)
+    turtle.width(5)
+    turtle.pencolor('#183720')
     #Drawing Dashes ------
     for i in range(dashes):
         turtle.pendown()

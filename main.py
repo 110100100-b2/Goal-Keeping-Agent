@@ -6,7 +6,7 @@ import functions
 wn = turtle.Screen()
 wn.title("Goal Keeping Agent")
 wn.bgcolor("lightgreen")
-wn.bgpic('back.gif')
+wn.bgpic('./images/back.gif')
 
 # Creating Goalie Turtle Object
 goalie = turtle.Turtle()
@@ -26,13 +26,13 @@ goalie.shape('circle')
 
 #Drawing Visualisation
 graphicsTurtle = turtle.Turtle()
-functions.graphics(wn, graphicsTurtle, line, 50)
+functions.graphics(wn, graphicsTurtle, line, 25)
 
 
 def shoot():
     #functions.shoot(wn, ball, line, 2)
     #functions.react(wn, goalie, line, 1)
-    functions.simulation(wn, ball, goalie, line, 4, 1, 50)
+    functions.simulation(wn, ball, goalie, line, 4, 1, 25)
 
 wn.onkey(shoot, "space")
 
