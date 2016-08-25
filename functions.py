@@ -11,7 +11,7 @@ import turtle # For testing
 import random
 import math
 from threading import Thread #This was supposed to be for multithreading, but I'll find a workaround later
-
+import ScoreBoard
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 """
@@ -145,10 +145,10 @@ def goal_or_save(goals,  saves, ball, ball_distance, keeper_distance, ball_speed
     time_keeper = keeper_distance/keeper_speed
     if (time_ball > time_keeper):
         saves += 1
-        ball.write('Save')
+        ScoreBoard.counter_label("SAVE!!!", goals)
     else:
         goals +=1
-        ball.write('Goal')
+        ScoreBoard.counter_label("GOAL!!!", goals)
  
     
 def simulation(window, ball, keeper, line, ball_speed, keeper_speed, iters):
