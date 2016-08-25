@@ -139,8 +139,10 @@ def orient_turtle(turtle, impact_pos):
     turtle.setheading(0)
     turtle.left(turtle.towards(impact_pos))
     
-def goal_or_save(goals,  saves, ball, ball_distance, keeper_distance, ball_speed, keeper_speed):
+def goal_or_save(ball, ball_distance, keeper_distance, ball_speed, keeper_speed):
     # time = distance/speed
+    global goals
+    global saves
     time_ball = ball_distance/ball_speed
     time_keeper = keeper_distance/keeper_speed
     if (time_ball > time_keeper):
@@ -216,7 +218,7 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed, iters):
         elif ((keeper.pos()[1] - line[1]) <=1): # Crossing Upper Post
             break
         """
-    goal_or_save(goals, saves, ball, hyp, keeper_distance, ball_speed, keeper_speed)
+    goal_or_save(ball, hyp, keeper_distance, ball_speed, keeper_speed)
     
 
     
