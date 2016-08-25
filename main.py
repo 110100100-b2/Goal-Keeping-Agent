@@ -4,6 +4,7 @@ import turtle
 import functions
 
 wn = turtle.Screen()
+wn.setup(width=839, height=1039)
 wn.title("Goal Keeping Agent")
 wn.bgcolor("lightgreen")
 wn.bgpic('./images/back.gif')
