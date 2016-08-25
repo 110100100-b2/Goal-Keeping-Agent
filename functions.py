@@ -150,8 +150,6 @@ def goal_or_save(goals,  saves, ball, ball_distance, keeper_distance, ball_speed
         goals +=1
         ball.write('Goal')
  
-def standardize_speed_distance():
-    break
     
 def simulation(window, ball, keeper, line, ball_speed, keeper_speed, iters):
     # Due to the nature of the iterations there will be a small error in the region of +-1 pixel
