@@ -188,13 +188,24 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed, iters):
     
     ball_distance_counter = hyp
     keeper_distance_counter = keeper_distance
+
+    #Creating Text Turtle
+    text_turtle = turtle.Turtle()
+    text_turtle.shape('blank')  
+    text_turtle.penup()   
     
     for i in range(iters):
         #Moving Ball
         ball.pencolor('grey')
         ball.pendown()
         if ((ball_distance_counter - hyp/iters/2) > 0.0):
+            #Ball Movement
             ball.forward(hyp/iters/2)
+            text_turtle.clear()
+            text_turtle.setpos(ball.pos())    
+            #Text
+            text_turtle.write('Impact Position: {}'.format(impact_position))
+            #Updating Counter
             ball_distance_counter -= hyp/iters/2
         ball.penup()
         if ((ball_distance_counter - hyp/iters/2) > 0.0):
