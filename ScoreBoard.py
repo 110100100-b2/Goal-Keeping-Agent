@@ -25,8 +25,9 @@ def counter_label(temp, score):
   
     def delete():
            
-        label.configure(text = ("The score is", str(score)), bg = "white")
-  
+        label.configure(text = ("The score is", str(score)), bg = "orange")
+        root.configure(bg = "orange")
+
     def destroy():
     
         root.destroy()
@@ -34,10 +35,12 @@ def counter_label(temp, score):
     if temp == "GOAL!!!":
         
         label.configure(bg = "red")
+        root.configure(bg = "red")
   
     if temp == "SAVE!!!":
     
         label.configure(bg = "green")
+        root.configure (bg = "green")
   
     label.configure(text = temp)
     label.after(2000, delete)
