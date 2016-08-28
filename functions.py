@@ -152,7 +152,15 @@ def goal_or_save(ball, ball_distance, keeper_distance, ball_speed, keeper_speed)
         goals +=1
         ScoreBoard.counter_label("GOAL!!!", goals)
  
-    
+def keeper_or_goalie_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed):
+     # time = distance/speed
+    time_ball = ball_distance/ball_speed
+    time_keeper = keeper_distance/keeper_speed
+    if (time_ball > time_keeper):
+        return('keeper-arrives-first')
+    else:
+        return('ball-arrives-first')
+             
 def simulation(window, ball, keeper, line, ball_speed, keeper_speed, iters):
     # Due to the nature of the iterations there will be a small error in the region of +-1 pixel
     global start_point
@@ -172,50 +180,70 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed, iters):
     ball.penup()
     ball.width(3)
     ball.setpos(start_point)
+    ball.clear()
     
     #Setting ball 
     window.register_shape('./images/soccer_ball.gif')
     ball.shape('./images/soccer_ball.gif')    
-
+    
+       
+    # Orienting turtles
     orient_turtle(ball, impact_position)
-    orient_turtle(keeper, impact_position)
+    orient_turtle(keeper, impact_position)   
 
 
     
     #Moving Turtles
-    hyp = projection_data[2] # Distance ball has to travel
+    ball_distance = projection_data[2] # Distance ball has to travel
     keeper_distance = math.fabs(impact_position[1] - keeper.pos()[1])
     
-    ball_distance_counter = hyp
+    ball_distance_counter = ball_distance
     keeper_distance_counter = keeper_distance
 
     #Creating Text Turtle
     text_turtle = turtle.Turtle()
     text_turtle.shape('blank')  
-    text_turtle.penup()   
+    text_turtle.penup() 
+         
+    # Speed def= pixels.iterations^{-1} 
+    # Because of this definition of speed, the error distance will be +- the speed (in pixels)
+    ball_arrived = False
+    keeper_arrived = False
     
-    for i in range(iters):
+    while(ball_arrived == False): #This way one (and most often ONLY one turtle) will always reach the impact position, iterations are the analogue of time 
         #Moving Ball
         ball.pencolor('grey')
         ball.pendown()
-        if ((ball_distance_counter - hyp/iters/2) > 0.0):
+        if ((ball_distance_counter - ball_speed/2) > 0.0):
             #Ball Movement
-            ball.forward(hyp/iters/2)
+            ball.forward(ball_speed/2)
             text_turtle.clear()
             text_turtle.setpos(ball.pos())    
             #Text
             text_turtle.write('Impact Position: {}'.format(impact_position))
             #Updating Counter
-            ball_distance_counter -= hyp/iters/2
+            ball_distance_counter -= ball_speed/2
+        elif(keeper_or_goalie_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed) == 'ball-arrives-first'):
+            ball.speed(ball_speed) # We have to do this as the error distance is dependant on the speed
+            ball.goto(impact_position) # We have to do this as the error distance is dependant on the speed
+            ball_arrived = True
         ball.penup()
-        if ((ball_distance_counter - hyp/iters/2) > 0.0):
-            ball.forward(hyp/iters/2)
-            ball_distance_counter -= hyp/iters/2       
-        
+        if ((ball_distance_counter - ball_speed/2) > 0.0):
+            ball.forward(ball_speed/2)
+            ball_distance_counter -= ball_speed/2   
+        elif(keeper_or_goalie_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed) == 'ball-arrives-first'):
+            ball.speed(ball_speed) # We have to do this as the error distance is dependant on the speed
+            ball.goto(impact_position) # We have to do this as the error distance is dependant on the speed
+            ball_arrived = True
         #Moving Keeper
-        if ((keeper_distance_counter - keeper_distance/iters) > 0.0):
-            keeper.forward(keeper_distance/iters)
-            keeper_distance_counter -= keeper_distance/iters   
+        if ((keeper_distance_counter - keeper_speed) > 0.0):
+            keeper.forward(keeper_speed)            
+            keeper_distance_counter -= keeper_speed
+        if (((ball_distance_counter - ball_speed/2) < 0.0) and ((keeper_distance_counter - keeper_speed) < 0.0)):
+            # This branch will be reached if the keeper arrives first and the ball arrives second
+            keeper.setpos(impact_position) # We have to do this as the error distance is dependant on the speed
+            ball.setpos(impact_position)
+            ball_arrived = True
             
         """#Breaking loop
         if ((ball.pos()[0] - line[0]) <=1): # Crossing Vertical Line
@@ -229,7 +257,7 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed, iters):
         elif ((keeper.pos()[1] - line[1]) <=1): # Crossing Upper Post
             break
         """
-    goal_or_save(ball, hyp, keeper_distance, ball_speed, keeper_speed)
+    goal_or_save(ball, ball_distance, keeper_distance, ball_speed, keeper_speed)
     
 
     
