@@ -55,7 +55,6 @@ def setRandomPos(line):
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
-
 def draw_line(window, turtle, width):
     """
     @Parameters: 
@@ -126,12 +125,6 @@ def projection(line):
 
 This is where the main portion of the AI is housed, it contains three functions
 
-- shoot() : This function contains the code written for the 'Ball' turtle
-- react() : This function contains the code written for the 'Goalie' turtle
-
-- engine() : This function was supposed to be where both of the above two functions were executed simultaneously, but I haven't found a way to do that yet.
-
-# NOTE: I may have to rewrite quite a bit of these functions, and they all may collapse into one function at the end, in engine(), so this may change a bit, in the next few hours. 
 
 """
 
@@ -244,19 +237,8 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed, iters):
             keeper.setpos(impact_position) # We have to do this as the error distance is dependant on the speed
             ball.setpos(impact_position)
             ball_arrived = True
-            
-        """#Breaking loop
-        if ((ball.pos()[0] - line[0]) <=1): # Crossing Vertical Line
-            break
-        elif ((ball.pos()[1] - line[1]) <=1): #Crossing Lower Post
-            break
-        elif ((keeper.pos()[1] - line[1]) >=-1): # Crossing Lower Post
-            break 
-        elif ((keeper.pos()[1] - line[1]) <=1): # Crossing Upper Post
-            break             
-        elif ((keeper.pos()[1] - line[1]) <=1): # Crossing Upper Post
-            break
-        """
+    
+    # Updating Goal Counter        
     goal_or_save(ball, ball_distance, keeper_distance, ball_speed, keeper_speed)
     
 
