@@ -11,6 +11,8 @@ import turtle # For testing
 import random
 import math
 import ScoreBoard
+
+
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 """
@@ -40,7 +42,6 @@ saves = 0
 goals = 0
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 def setRandomPos(line):
     """
@@ -122,15 +123,21 @@ def projection(line):
   AI 
 ------
 
-This is where the main portion of the AI is housed, it contains three functions
+This is where the main portion of the AI is housed.
 
 """
 
 def orient_turtle(turtle, impact_pos):
+    """
+    This function orients the turtles to the projected impact position
+    """
     turtle.setheading(0)
     turtle.left(turtle.towards(impact_pos))
     
-def goal_or_save(ball, ball_distance, keeper_distance, ball_speed, keeper_speed):
+def update_goal_counter(ball, ball_distance, keeper_distance, ball_speed, keeper_speed):
+    """
+    This function updates the goal counter and makes the scoreboard visible
+    """    
     # time = distance/speed
     global goals
     global saves
@@ -143,7 +150,10 @@ def goal_or_save(ball, ball_distance, keeper_distance, ball_speed, keeper_speed)
         goals +=1
         ScoreBoard.counter_label("GOAL!!!", goals)
  
-def keeper_or_goalie_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed):
+def keeper_or_ball_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed):
+    """
+    This function is used purely to calculate wheter the keeper or ball arrives at the impact position first
+    """        
      # time = distance/speed
     time_ball = ball_distance/ball_speed
     time_keeper = keeper_distance/keeper_speed
@@ -231,7 +241,7 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
             # Updating Counter
             ball_distance_counter -= ball_speed/2
             
-        elif(keeper_or_goalie_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed) == 'ball-arrives-first'): # Checking to see if the ball arrives first via calculations
+        elif(keeper_or_ball_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed) == 'ball-arrives-first'): # Checking to see if the ball arrives first via calculations
             ball.speed(ball_speed) # We have to do this as the error distance is dependant on the speed
             ball.goto(impact_position) # We have to do this as the error distance is dependant on the speed
             ball_arrived = True
@@ -242,7 +252,7 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
             ball.forward(ball_speed/2)
             ball_distance_counter -= ball_speed/2   
             
-        elif(keeper_or_goalie_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed) == 'ball-arrives-first'):
+        elif(keeper_or_ball_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed) == 'ball-arrives-first'):
             ball.speed(ball_speed) # We have to do this as the error distance is dependant on the speed
             ball.goto(impact_position) # We have to do this as the error distance is dependant on the speed
             ball_arrived = True
@@ -260,7 +270,7 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
             ball_arrived = True
     
     # Updating Goal Counter        
-    goal_or_save(ball, ball_distance, keeper_distance, ball_speed, keeper_speed)
+    update_goal_counter(ball, ball_distance, keeper_distance, ball_speed, keeper_speed)
     
 
     
@@ -279,6 +289,8 @@ def generate_random_speed():
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 """
 ------------
   GRAPHICS
