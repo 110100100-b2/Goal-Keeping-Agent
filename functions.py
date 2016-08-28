@@ -10,7 +10,6 @@ import turtle # For testing
 
 import random
 import math
-from threading import Thread #This was supposed to be for multithreading, but I'll find a workaround later
 import ScoreBoard
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -125,7 +124,6 @@ def projection(line):
 
 This is where the main portion of the AI is housed, it contains three functions
 
-
 """
 
 def orient_turtle(turtle, impact_pos):
@@ -154,22 +152,37 @@ def keeper_or_goalie_first(ball, ball_distance, keeper_distance, ball_speed, kee
     else:
         return('ball-arrives-first')
              
-def simulation(window, ball, keeper, line, ball_speed, keeper_speed, iters):
-    # Due to the nature of the iterations there will be a small error in the region of +-1 pixel
+def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
+    """
+    Outline: This is the main function, it houses the whole simulation
+    
+    @Params:
+    window - The TurtleScreen()
+    ball - The turtle representing the ball
+    keeper - The turtle representing the keeper
+    line - The line object drawn initially in main.py
+    ball_speed - The speed of the ball (in pixels.iteration^{-1})
+    keeper_speed - The speed of the keeper (in pixels.iteration^{-1})
+    
+    Important Note: Speed is defined in this simulation as the number of pixels moved per iteration of a loop. In a real-world environment speed would be m/s (metres per second), but for this simulated environment speed is defined as pixels/iteration, therefore a speed with magnitude 10, implies that a turtle will move 10 pixels for each iteration (each iteration of the while loop)
+    
+    """
+    # Speed def= pixels.iterations^{-1} 
+    # Because of this definition of speed, the error distance will be +- the speed (in pixels)
     global start_point
     global saves
     global goals
+    
     # Getting Projection Data
     projection_data = projection(line)
     impact_position = projection_data[0]
     angle = projection_data[1]
     
-    #Setting Speed of Turtles
+    # Setting Speed of Turtles
     ball.speed(ball_speed)
     keeper.speed(keeper_speed)
-    
-   
-    # Orienting turtles
+       
+    # Getting ball 'turtle' ready
     ball.penup()
     ball.width(3)
     ball.setpos(start_point)
@@ -178,22 +191,20 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed, iters):
     #Setting ball 
     window.register_shape('./images/soccer_ball.gif')
     ball.shape('./images/soccer_ball.gif')    
-    
-       
+           
     # Orienting turtles
     orient_turtle(ball, impact_position)
-    orient_turtle(keeper, impact_position)   
-
-
+    orient_turtle(keeper, impact_position) 
     
-    #Moving Turtles
+    # Moving Turtles
     ball_distance = projection_data[2] # Distance ball has to travel
     keeper_distance = math.fabs(impact_position[1] - keeper.pos()[1])
     
+    # Initializing counters to keep track of distances
     ball_distance_counter = ball_distance
     keeper_distance_counter = keeper_distance
 
-    #Creating Text Turtle
+    # Creating Text Turtle
     text_turtle = turtle.Turtle()
     text_turtle.shape('blank')  
     text_turtle.penup() 
@@ -204,34 +215,44 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed, iters):
     keeper_arrived = False
     
     while(ball_arrived == False): #This way one (and most often ONLY one turtle) will always reach the impact position, iterations are the analogue of time 
-        #Moving Ball
+        
+        # Moving Ball
+        
         ball.pencolor('grey')
         ball.pendown()
-        if ((ball_distance_counter - ball_speed/2) > 0.0):
-            #Ball Movement
+        
+        if ((ball_distance_counter - ball_speed/2) > 0.0): # If this is true, the ball still has space to move forward to impace position
+            # Ball Movement
             ball.forward(ball_speed/2)
             text_turtle.clear()
             text_turtle.setpos(ball.pos())    
-            #Text
+            # Text
             text_turtle.write('Impact Position: {}'.format(impact_position))
-            #Updating Counter
+            # Updating Counter
             ball_distance_counter -= ball_speed/2
-        elif(keeper_or_goalie_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed) == 'ball-arrives-first'):
+            
+        elif(keeper_or_goalie_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed) == 'ball-arrives-first'): # Checking to see if the ball arrives first via calculations
             ball.speed(ball_speed) # We have to do this as the error distance is dependant on the speed
             ball.goto(impact_position) # We have to do this as the error distance is dependant on the speed
             ball_arrived = True
+            
         ball.penup()
-        if ((ball_distance_counter - ball_speed/2) > 0.0):
+        
+        if ((ball_distance_counter - ball_speed/2) > 0.0): # If this is true, the ball still has space to move forward to impace position
             ball.forward(ball_speed/2)
             ball_distance_counter -= ball_speed/2   
+            
         elif(keeper_or_goalie_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed) == 'ball-arrives-first'):
             ball.speed(ball_speed) # We have to do this as the error distance is dependant on the speed
             ball.goto(impact_position) # We have to do this as the error distance is dependant on the speed
             ball_arrived = True
-        #Moving Keeper
+            
+        # Moving Keeper
+        
         if ((keeper_distance_counter - keeper_speed) > 0.0):
             keeper.forward(keeper_speed)            
             keeper_distance_counter -= keeper_speed
+            
         if (((ball_distance_counter - ball_speed/2) < 0.0) and ((keeper_distance_counter - keeper_speed) < 0.0)):
             # This branch will be reached if the keeper arrives first and the ball arrives second
             keeper.setpos(impact_position) # We have to do this as the error distance is dependant on the speed
