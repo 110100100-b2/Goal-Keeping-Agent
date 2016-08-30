@@ -145,10 +145,10 @@ def update_goal_counter(ball, ball_distance, keeper_distance, ball_speed, keeper
     time_keeper = keeper_distance/keeper_speed
     if (time_ball > time_keeper):
         saves += 1
-        ScoreBoard.counter_label("SAVE!!!", goals)
+        ScoreBoard.counter_label("SAVE!!!")
     else:
         goals +=1
-        ScoreBoard.counter_label("GOAL!!!", goals)
+        ScoreBoard.counter_label("GOAL!!!")
  
 def keeper_or_ball_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed):
     """
@@ -359,4 +359,13 @@ def graphics(window, turtle, line, dashes):
             turtle.forward((r/dashes)/2)     
             turtle.penup()  
             turtle.forward((r/dashes)/2)    
+ 
+ def getGoals():
     
+    global goals
+    return goals
+
+def getSaves():
+    
+    global saves
+    return saves   
