@@ -2,12 +2,14 @@
 
 import turtle
 import functions
+import ScoreBoard
 
 wn = turtle.Screen()
 wn.setup(width=839, height=1039)
 wn.title("Goal Keeping Agent")
 wn.bgcolor("lightgreen")
 wn.bgpic('./images/back.gif')
+ScoreBoard.start_or_quit("START")
 
 # Creating Goalie Turtle Object
 goalie = turtle.Turtle()
@@ -16,7 +18,6 @@ goalie = turtle.Turtle()
 ball = turtle.Turtle()
 ball.shape('blank')    
     
-
 
 # We use this to determine the range which the Goalie can randomly appear
 line = functions.draw_line(wn, goalie, 5)
@@ -34,8 +35,19 @@ def shoot():
     #functions.shoot(wn, ball, line, 2)
     #functions.react(wn, goalie, line, 1)
     functions.simulation(wn, ball, goalie, line, 10, 1)
+    
+def help():
+    
+    ScoreBoard.start_or_quit("START")
+    
+def quit():
+    
+    ScoreBoard.start_or_quit("QUIT")
+    wn.bye()
 
 wn.onkey(shoot, "space")
+wn.onkey(help, "i")
+wn.onkey(quit, "q")
 
 wn.listen()
 wn.mainloop()
