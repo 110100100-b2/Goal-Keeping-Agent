@@ -360,12 +360,10 @@ def graphics(window, turtle, line, dashes):
             turtle.penup()  
             turtle.forward((r/dashes)/2)    
  
- def getGoals():
-    
+def getGoals():    
     global goals
     return goals
 
-def getSaves():
-    
+def getSaves():    
     global saves
     return saves   

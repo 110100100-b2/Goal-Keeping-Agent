@@ -2,7 +2,6 @@ import tkinter as tk       #Basically importing the python gui function: tkinter
 import time #used for the timer added
 import functions
 
-
 goals = 0
 saves = 0
 
@@ -18,8 +17,7 @@ def center(root):
     y = height/2 - int(size2[0])/2
     root.geometry("%dx%d+%d+%d" % ((int(size[0]), int(size2[0])) + (x, y)))
 
-def start_or_quit(temp):
-    
+def start_or_quit(temp):    
     global goals
     global saves
     
@@ -27,20 +25,16 @@ def start_or_quit(temp):
     root.title("Instructions")
     root.configure(bg = "orange")
     
-    if temp == "START":
-        
-        temp = "'Space' to shoot\n'i' for help\n'q' to quit"
-    
-    elif temp == "QUIT":
-        
+    if temp == "START":        
+        temp = "'Space' to shoot\n'i' for help\n'q' to quit"    
+    elif temp == "QUIT":        
         temp = ("Total Goals - ", goals, "\nTotal Shots - ", (goals + saves), "\nTotal Saves - ", saves)
         
     label = tk.Label(root, fg = "blue", font = "Times", bg = "orange", text = temp)
     label.pack()
     center(root)
     
-    def destroy():
-        
+    def destroy():        
         root.destroy()
     
     label.after(5000, destroy)
