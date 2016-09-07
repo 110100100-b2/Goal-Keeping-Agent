@@ -45,8 +45,13 @@ def quit():
     ScoreBoard.start_or_quit("QUIT")
     wn.bye()
 
+def clearLines():
+    
+    ball.clear()
+
 wn.onkey(shoot, "space")
 wn.onkey(help, "i")
+wn.onkey(clearLines, "c")
 wn.onkey(quit, "q")
 
 wn.listen()
