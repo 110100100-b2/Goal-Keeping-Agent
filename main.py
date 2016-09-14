@@ -1,11 +1,6 @@
 # Main Program can go here, we can load all other modules and run it in this .py file.
 
 import turtle
-
-# Importing Modules
-import sys
-sys.path.insert(0, './modules')
-
 import functions
 import ScoreBoard
 
