@@ -11,6 +11,8 @@ import turtle # For testing
 import random
 import math
 import ScoreBoard
+import time
+from datetime import datetime
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,6 +34,8 @@ import ScoreBoard
 
 - x_distance (the horizontal distance from start point 'X' to line, used in trigonometric calculations in functions 'projection' and in 'graphics')
 
+- counter (counts the number of simulations run)
+
 """
 start_point = (0, 0)
 x_spot = 0
@@ -40,6 +44,7 @@ r = 0
 x_distance = 0
 saves = 0
 goals = 0
+counter = 0
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -182,6 +187,7 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
     global start_point
     global saves
     global goals
+    global counter
     
     # Getting Projection Data
     projection_data = projection(line)
@@ -197,7 +203,7 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
     ball.width(3)
     ball.setpos(start_point)
     
-    #Setting ball 
+    # Setting ball 
     window.register_shape('./images/soccer_ball.gif')
     ball.shape('./images/soccer_ball.gif')    
            
@@ -271,6 +277,15 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
     # Updating Goal Counter        
     update_goal_counter(ball, ball_distance, keeper_distance, ball_speed, keeper_speed)
     ball.goto(0,0)
+    
+    # Updating Simulation Counter
+    counter += 1
+    
+    # Logging simulation
+    if (keeper_or_ball_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed) == 'ball-arrives-first'):    
+        log_data('simulation_data.txt', impact_position, ball_speed, keeper_speed, 'Yes') # i.e. Output 'Yes' for a goal
+    else:
+        log_data('simulation_data.txt', impact_position, ball_speed, keeper_speed, 'No') # i.e. Output 'No' for a save
 
     
 def generate_random_speed():
@@ -366,3 +381,31 @@ def getGoals():
 def getSaves():    
     global saves
     return saves   
+
+
+"""
+
+------------
+   LOGGING 
+------------
+
+"""
+
+def create_text(path):
+    open(path, 'w').close() #Clearing contents of text file
+    text_file = open(path, "w")
+    text_file.write("GOAL KEEPING AGENT - SIMULATION DATA\n\n")
+    text_file.write("================================================\n\n")
+    text_file.write("Data for simulation run on {}\n\n".format(time.ctime()))
+    text_file.write("================================================\n\n")
+    text_file.write("SIMULATION\tTIME\t\t\t\tIMPACT POSITION\t\t\t\tBALL SPEED\t\tKEEPER SPEED\t\tGOAL\t\tSCORE\n")
+    text_file.close()    
+    
+
+def log_data(path, impact_position, ball_speed, keeper_speed, goal):
+    global counter
+    global goals
+    with open(path, "a") as text_file:
+        text_file.write("\n#{}\t\t{}\t\t{}\t\t{}\t\t\t{}\t\t\t{}\t\t{}\n".format(str(counter),  time.ctime(), str(impact_position), str(ball_speed), str(keeper_speed), goal, str(goals)))
+        text_file.close()    
+    

@@ -1,0 +1,13 @@
+GOAL KEEPING AGENT - SIMULATION DATA
+
+================================================
+
+Data for simulation run on Wed Sep 14 16:50:29 2016
+
+================================================
+
+SIMULATION	TIME				IMPACT POSITION				BALL SPEED		KEEPER SPEED		GOAL		SCORE
+
+#1		Wed Sep 14 16:50:46 2016		(-320.0, -144.41179052370364)		10			1			Yes		1
+
+#2		Wed Sep 14 16:50:54 2016		(-320.0, -50.22268051748201)		10			1			Yes		2

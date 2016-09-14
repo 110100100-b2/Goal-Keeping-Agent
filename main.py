@@ -11,6 +11,9 @@ wn.bgcolor("lightgreen")
 wn.bgpic('./images/back.gif')
 ScoreBoard.start_or_quit("START")
 
+# Creating text file to write 
+functions.create_text('simulation_data.txt')
+
 # Creating Goalie Turtle Object
 goalie = turtle.Turtle()
 
