@@ -196,7 +196,6 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
     ball.penup()
     ball.width(3)
     ball.setpos(start_point)
-    ball.clear()
     
     #Setting ball 
     window.register_shape('./images/soccer_ball.gif')
@@ -271,7 +270,7 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
     
     # Updating Goal Counter        
     update_goal_counter(ball, ball_distance, keeper_distance, ball_speed, keeper_speed)
-    
+    ball.goto(0,0)
 
     
 def generate_random_speed():
