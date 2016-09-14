@@ -37,7 +37,7 @@ def shoot():
     #functions.shoot(wn, ball, line, 2)
     #functions.react(wn, goalie, line, 1)
     if ball.position() == (0,0):        
-        functions.simulation(wn, ball, goalie, line, 10, 1)
+        functions.simulation(wn, ball, goalie, line, functions.generate_random_speed(), 1)
     
 def help():    
     ScoreBoard.start_or_quit("START")
