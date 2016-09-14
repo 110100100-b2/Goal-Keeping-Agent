@@ -289,17 +289,10 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
 
     
 def generate_random_speed():
-    values=[0.5,0.25,1.25,1.75,2]
-    # variable s= the speed of the Goalie
-    s=random.randrange(1,10)  
-    # so the range is 1-10, because speed works in that range of integers. I didn't include 0 because well...that means no movement. Turns out 1=fastest and 0=slowest.
-    speed=(int)(s*(values[random.randrange(0,4)])) # speed of the ball
-    if speed > 10 or speed <0.5:
-        speed=6  # 6 is seen as the 'normal' speed
-    
-    
-    #return null
-    return random.randint(10, 30)  
+    values = [0.5,0.25,1.25,1.75,2] # Given values in assigment outline
+    index = random.randrange(0, len(values)-1)   # Picks a random index from our discrete range of values   
+    speed = values[index]*10 # We multiple by 10 to get our range of values to be [2.5, 5, 12.5, 17.5, 20], this is just so that the simulation doesn't run painstakingly slow
+    return speed
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
