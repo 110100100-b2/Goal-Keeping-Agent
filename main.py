@@ -19,8 +19,7 @@ goalie = turtle.Turtle()
 
 #Creating Ball
 ball = turtle.Turtle()
-ball.shape('blank')    
-    
+ball.shape('blank')  
 
 # We use this to determine the range which the Goalie can randomly appear
 line = functions.draw_line(wn, goalie, 5)
@@ -37,21 +36,17 @@ functions.graphics(wn, graphicsTurtle, line, 25)
 def shoot():
     #functions.shoot(wn, ball, line, 2)
     #functions.react(wn, goalie, line, 1)
-    if ball.position() == (0,0):
-        
+    if ball.position() == (0,0):        
         functions.simulation(wn, ball, goalie, line, 10, 1)
     
-def help():
-    
+def help():    
     ScoreBoard.start_or_quit("START")
     
-def quit():
-    
+def quit():    
     ScoreBoard.start_or_quit("QUIT")
     wn.bye()
 
-def clearLines():
-    
+def clearLines():    
     ball.clear()
 
 wn.onkey(shoot, "space")
