@@ -233,7 +233,7 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
         
         # Moving Ball
         
-        ball.pencolor('grey')
+        ball.pencolor('#abb0a4')
         ball.pendown()
         
         if ((ball_distance_counter - ball_speed/2) > 0.0): # If this is true, the ball still has space to move forward to impace position
@@ -354,7 +354,7 @@ def graphics(window, turtle, line, dashes):
     
     r = math.sqrt(x_distance**2 + y**2)
     turtle.width(5)
-    turtle.pencolor('#183720')
+    turtle.pencolor('#3f5423')
     #Drawing Dashes ------
     for i in range(dashes):
         turtle.pendown()
