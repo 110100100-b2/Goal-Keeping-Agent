@@ -28,7 +28,7 @@ def start_or_quit(temp):
     if temp == "START":        
         temp = "'Space' to shoot\n'i' for help\n'c' to clear dotted shot lines\n'q' to quit"    
     elif temp == "QUIT":        
-        temp = ("Total Goals - ", goals, "\nTotal Shots - ", (goals + saves), "\nTotal Saves - ", saves)
+        temp = ("Total Goals - " + str(goals) + "\nTotal Shots - " + str((goals + saves)) + "\nTotal Saves - " + str(saves))
         
     label = tk.Label(root, fg = "blue", font = "Times", bg = "orange", text = temp)
     label.pack()
