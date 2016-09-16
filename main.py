@@ -16,11 +16,18 @@ wn.bgcolor("lightgreen")
 wn.bgpic('./images/back.gif')
 ScoreBoard.start_or_quit("START")
 
+#Registering outside emoji shapes
+wn.register_shape('./images/emojis/sleeping.gif')
+wn.register_shape('./images/emojis/happy.gif')
+wn.register_shape('./images/emojis/lol.gif')
+wn.register_shape('./images/emojis/sad.gif')
+
 # Creating text file to write 
 functions.create_text('simulation_data.txt')
 
 # Creating Goalie Turtle Object
 goalie = turtle.Turtle()
+goalie.shape('./images/emojis/sleeping.gif') 
 
 #Creating Ball
 ball = turtle.Turtle()
@@ -31,7 +38,6 @@ line = functions.draw_line(wn, goalie, 5)
 
 #Essentially what this is doing is determining a random y value that lies along the line x = line[0], thus we can determine a random position <x, y> that will ALWAYS be along the line we've drawn
 goalie.setpos(functions.setRandomPos(line))
-goalie.shape('circle')
 
 #Drawing Visualisation
 graphicsTurtle = turtle.Turtle()
