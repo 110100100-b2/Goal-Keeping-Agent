@@ -36,6 +36,7 @@ from datetime import datetime
 
 - counter (counts the number of simulations run)
 
+- speedIncrement (sum of speeds from all the runs. Used for calculating the average speed)
 """
 start_point = (0, 0)
 x_spot = 0
@@ -373,6 +374,7 @@ def graphics(window, turtle, line, dashes):
             turtle.penup()  
             turtle.forward((r/dashes)/2)    
  
+ # Accessor Methods:
 def getGoals():    
     global goals
     return goals
