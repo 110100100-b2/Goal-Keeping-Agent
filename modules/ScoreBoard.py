@@ -1,11 +1,11 @@
 import tkinter as tk       #Basically importing the python gui function: tkinter
-import time #used for the timer added
+import time                #used for the timer added
 import functions
 
-goals = 0
+goals = 0 
 saves = 0
 
-def center(root):
+def center(root): #to center our roots
     root.update_idletasks() # to ensure accuracy in height and width values
     width = root.winfo_screenwidth()
     height = root.winfo_screenheight()
@@ -17,11 +17,11 @@ def center(root):
     y = height/2 - int(size2[0])/2
     root.geometry("%dx%d+%d+%d" % ((int(size[0]), int(size2[0])) + (x, y)))
 
-def start_or_quit(temp):    
+def start_or_quit(temp):    #start and quit roots
     global goals
     global saves
     
-    def findGoalsToShotsRatio(goals, saves):
+    def findGoalsToShotsRatio(goals, saves): #finds simplest goals to shots ratio
         
         shots = goals + saves
         val = 1
@@ -35,7 +35,7 @@ def start_or_quit(temp):
         return (str(goals/val) + ":" + str(shots/val))
        
     
-    root = tk.Tk()
+    root = tk.Tk() #creating root
     root.title("Instructions")
     root.configure(bg = "orange")
     
@@ -48,19 +48,16 @@ def start_or_quit(temp):
     label.pack()
     center(root)
     
-    def destroy():        
-        root.destroy()
-    
-    label.after(5000, destroy)
+    label.after(5000, root.destroy) #deletes root after 5 seconds
     
 
-def counter_label(temp): 
+def counter_label(temp): #appears after every shot
     global goals
     global saves
     goals = functions.getGoals()
     saves = functions.getSaves()
     
-    root = tk.Tk() # Creates a  separate window i.e. the label that should display 
+    root = tk.Tk() # Creates a  root 
     root.title("Score Board Update") #Title
     label = tk.Label(root,  fg="blue", font="Times") # customise defined label
     label.pack()
@@ -70,9 +67,6 @@ def counter_label(temp):
         label.configure(text = (str(goals) + " goal(s) scored"), bg = "orange")
         root.configure(bg = "orange")
         label.pack()
-
-    def destroy():    
-        root.destroy()
     
     if temp == "GOAL!!!":        
         label.configure(bg = "red")
@@ -86,7 +80,7 @@ def counter_label(temp):
     label.configure(text = temp)
     label.pack() # this sort of adjusts the windows size based on the labels contents 
     label.after(2000, delete)
-    label.after(5000, destroy)
+    label.after(5000, root.destroy)
   
 
 
