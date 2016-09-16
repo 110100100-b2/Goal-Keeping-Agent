@@ -53,7 +53,7 @@ def shoot():
     start_point = functions.getStartPoint()
     if ball.position() == start_point or start == False:        
         start = True
-        functions.simulation(wn, ball, goalie, line, functions.generate_random_speed(), 1)    
+        functions.simulation(wn, ball, goalie, line, functions.generate_random_speed(), 1)    s = 1
     
     
 def help():    #help menu
