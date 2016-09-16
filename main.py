@@ -27,7 +27,6 @@ functions.create_text('simulation_data.txt')
 
 # Creating Goalie Turtle Object
 goalie = turtle.Turtle()
-goalie.shape('./images/emojis/sleeping.gif') 
 
 #Creating Ball
 ball = turtle.Turtle()
@@ -38,6 +37,10 @@ line = functions.draw_line(wn, goalie, 5)
 
 #Essentially what this is doing is determining a random y value that lies along the line x = line[0], thus we can determine a random position <x, y> that will ALWAYS be along the line we've drawn
 goalie.setpos(functions.setRandomPos(line))
+
+#Setting emoji as goalie
+goalie.shape('circle') #this allows the goalkeeper's face to appear above the goal line
+goalie.shape('./images/emojis/sleeping.gif') 
 
 #Drawing Visualisation
 graphicsTurtle = turtle.Turtle()
