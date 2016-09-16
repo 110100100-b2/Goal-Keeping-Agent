@@ -279,7 +279,7 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
     
     # Updating Goal Counter        
     update_goal_counter(ball, ball_distance, keeper_distance, ball_speed, keeper_speed, keeper)
-    ball.goto(0,0)
+    ball.goto(start_point)
     
     # Updating Simulation Counter
     counter += 1
@@ -378,7 +378,9 @@ def getSaves():
     global saves
     return saves   
 
-
+def getStartPoint():
+    global start_point
+    return start_point
 """
 
 ------------
