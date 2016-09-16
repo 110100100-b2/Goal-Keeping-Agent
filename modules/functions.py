@@ -45,6 +45,7 @@ x_distance = 0
 saves = 0
 goals = 0
 counter = 0
+speedIncrement = 0
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -292,9 +293,11 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
 
     
 def generate_random_speed():
+    global speedIncrement
     values = [0.5,0.75,1.25,1.75,2] # Given values in assigment outline
     index = random.randrange(0, len(values)-1)   # Picks a random index from our discrete range of values   
-    speed = values[index]*10 # We multiple by 10 to get our range of values to be [2.5, 5, 12.5, 17.5, 20], this is just so that the simulation doesn't run painstakingly slow
+    speed = values[index]*10 # We multiple by 10 to get our range of values to be [5, 7.5, 12.5, 17.5, 20], this is just so that the simulation doesn't run painstakingly slow
+    speedIncrement += speed
     return speed
 
 
@@ -381,6 +384,16 @@ def getSaves():
 def getStartPoint():
     global start_point
     return start_point
+    
+def getAverageBallSpeed():
+    global goals
+    global saves
+    global speedIncrement
+    
+    if (goals + saves) > 0:
+        return (speedIncrement/(goals + saves))
+    else:
+        return 0
 """
 
 ------------
