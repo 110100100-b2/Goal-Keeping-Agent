@@ -12,7 +12,7 @@ import ScoreBoard
 start = False
 
 wn = turtle.Screen()
-wn.setup(width=839, height=1039)
+wn.setup(width=839, height=1039, startx = 250, starty = 0)
 wn.title("Goal Keeping Agent")
 wn.bgcolor("lightgreen")
 wn.bgpic('./images/back.gif')
