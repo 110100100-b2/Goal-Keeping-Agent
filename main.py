@@ -12,7 +12,7 @@ import ScoreBoard
 start = False
 
 wn = turtle.Screen()
-wn.setup(width=839, height=1039, startx = 250, starty = 0)
+wn.setup(width=839, height=1039, startx = 250, starty = 0) # dimensions and positioning of the screen
 wn.title("Goal Keeping Agent")
 wn.bgcolor("lightgreen")
 wn.bgpic('./images/back.gif')
@@ -56,14 +56,14 @@ def shoot():
         functions.simulation(wn, ball, goalie, line, functions.generate_random_speed(), 1)    
     
     
-def help():    
+def help():    #help menu
     ScoreBoard.start_or_quit("START")
     
-def quit():    
+def quit():    #quit screen will hence be displayed with stats
     ScoreBoard.start_or_quit("QUIT")
     wn.bye()
 
-def clearLines():    
+def clearLines():    #clears dotted lines
     ball.clear()
 
 wn.onkey(shoot, "space")
