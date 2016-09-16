@@ -48,6 +48,10 @@ goals = 0
 counter = 0
 speedIncrement = 0
 
+text_turtle = turtle.Turtle() #turtle that displays the impact position of the ball
+text_turtle.penup()
+text_turtle.shape('blank')
+
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 def setRandomPos(line):
@@ -192,6 +196,7 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
     global saves
     global goals
     global counter
+    global text_turtle
     
     # Getting Projection Data
     projection_data = projection(line)
@@ -223,11 +228,6 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
     # Initializing counters to keep track of distances
     ball_distance_counter = ball_distance
     keeper_distance_counter = keeper_distance
-
-    # Creating Text Turtle
-    text_turtle = turtle.Turtle()
-    text_turtle.shape('blank')  
-    text_turtle.penup() 
          
     # Speed def= pixels.iterations^{-1} 
     # Because of this definition of speed, the error distance will be +- the speed (in pixels)
