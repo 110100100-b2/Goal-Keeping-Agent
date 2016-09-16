@@ -139,7 +139,7 @@ def orient_turtle(turtle, impact_pos):
     turtle.setheading(0)
     turtle.left(turtle.towards(impact_pos))
     
-def update_goal_counter(ball, ball_distance, keeper_distance, ball_speed, keeper_speed):
+def update_goal_counter(ball, ball_distance, keeper_distance, ball_speed, keeper_speed, goalie):
     """
     This function updates the goal counter and makes the scoreboard visible
     """    
@@ -151,9 +151,11 @@ def update_goal_counter(ball, ball_distance, keeper_distance, ball_speed, keeper
     if (time_ball > time_keeper):
         saves += 1
         ScoreBoard.counter_label("SAVE!!!")
+        goalie.shape('./images/emojis/lol.gif')
     else:
         goals +=1
         ScoreBoard.counter_label("GOAL!!!")
+        goalie.shape('./images/emojis/sad.gif')
  
 def keeper_or_ball_first(ball, ball_distance, keeper_distance, ball_speed, keeper_speed):
     """
@@ -205,7 +207,8 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
     
     # Setting ball 
     window.register_shape('./images/soccer_ball.gif')
-    ball.shape('./images/soccer_ball.gif')    
+    ball.shape('./images/soccer_ball.gif') 
+    keeper.shape('./images/emojis/happy.gif')
            
     # Orienting turtles
     orient_turtle(ball, impact_position)
@@ -275,7 +278,7 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
             ball_arrived = True
     
     # Updating Goal Counter        
-    update_goal_counter(ball, ball_distance, keeper_distance, ball_speed, keeper_speed)
+    update_goal_counter(ball, ball_distance, keeper_distance, ball_speed, keeper_speed, keeper)
     ball.goto(0,0)
     
     # Updating Simulation Counter
@@ -289,7 +292,7 @@ def simulation(window, ball, keeper, line, ball_speed, keeper_speed):
 
     
 def generate_random_speed():
-    values = [0.5,0.25,1.25,1.75,2] # Given values in assigment outline
+    values = [0.5,0.75,1.25,1.75,2] # Given values in assigment outline
     index = random.randrange(0, len(values)-1)   # Picks a random index from our discrete range of values   
     speed = values[index]*10 # We multiple by 10 to get our range of values to be [2.5, 5, 12.5, 17.5, 20], this is just so that the simulation doesn't run painstakingly slow
     return speed
