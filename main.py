@@ -9,6 +9,8 @@ sys.path.insert(0, './modules')
 import functions
 import ScoreBoard
 
+start = False
+
 wn = turtle.Screen()
 wn.setup(width=839, height=1039)
 wn.title("Goal Keeping Agent")
@@ -46,12 +48,13 @@ goalie.shape('./images/emojis/sleeping.gif')
 graphicsTurtle = turtle.Turtle()
 functions.graphics(wn, graphicsTurtle, line, 25)
 
-
 def shoot():
-    #functions.shoot(wn, ball, line, 2)
-    #functions.react(wn, goalie, line, 1)
-    if ball.position() == (0,0):        
-        functions.simulation(wn, ball, goalie, line, functions.generate_random_speed(), 1)
+    global start
+    start_point = functions.getStartPoint()
+    if ball.position() == start_point or start == False:        
+        start = True
+        functions.simulation(wn, ball, goalie, line, functions.generate_random_speed(), 1)    
+    
     
 def help():    
     ScoreBoard.start_or_quit("START")
