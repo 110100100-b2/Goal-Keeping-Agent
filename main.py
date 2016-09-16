@@ -18,7 +18,7 @@ wn.bgcolor("lightgreen")
 wn.bgpic('./images/back.gif')
 ScoreBoard.start_or_quit("START")
 
-#Registering outside emoji shapes
+#Registering outside emoji shapes... you could think of the emojis as a way to extend the AI of the goalee, as he knows when to be happy, sad, etc
 wn.register_shape('./images/emojis/sleeping.gif')
 wn.register_shape('./images/emojis/happy.gif')
 wn.register_shape('./images/emojis/lol.gif')
