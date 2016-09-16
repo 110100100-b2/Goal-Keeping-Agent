@@ -48,11 +48,12 @@ def counter_label(temp):
     
     root = tk.Tk() # Creates a  separate window i.e. the label that should display 
     root.title("Score Board Update") #Title
-    label = tk.Label(root,  fg="blue", font="Times") # customise defined label 
+    label = tk.Label(root,  fg="blue", font="Times") # customise defined label
+    label.pack()
     center(root)  
   
     def delete():           
-        label.configure(text = ("The score is ", goals), bg = "orange")
+        label.configure(text = (str(goals) + " goal(s) scored"), bg = "orange")
         root.configure(bg = "orange")
         label.pack()
 
