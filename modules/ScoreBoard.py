@@ -21,6 +21,20 @@ def start_or_quit(temp):
     global goals
     global saves
     
+    def findGoalsToShotsRatio(goals, saves):
+        
+        shots = goals + saves
+        val = 1
+
+        for i in range(1, (shots + 1)):
+               
+            if goals%i == 0 and shots%i == 0:
+                
+                val = i
+        
+        return (str(goals/val) + ":" + str(shots/val))
+       
+    
     root = tk.Tk()
     root.title("Instructions")
     root.configure(bg = "orange")
@@ -28,7 +42,7 @@ def start_or_quit(temp):
     if temp == "START":        
         temp = "'Space' to shoot\n'i' for help\n'c' to clear dotted shot lines\n'q' to quit"    
     elif temp == "QUIT":        
-        temp = ("Total Goals - " + str(goals) + "\nTotal Shots - " + str((goals + saves)) + "\nTotal Saves - " + str(saves))
+        temp = ("Total Goals - " + str(goals) + "\nTotal Shots - " + str((goals + saves)) + "\nTotal Saves - " + str(saves) + "\nGoals-Shots Ratio - " + findGoalsToShotsRatio(goals, saves) + "\nAverage Ball Speed - " + str(round(functions.getAverageBallSpeed(), 2)))
         
     label = tk.Label(root, fg = "blue", font = "Times", bg = "orange", text = temp)
     label.pack()
